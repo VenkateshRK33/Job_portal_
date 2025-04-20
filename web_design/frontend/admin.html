@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head><title>Admin - Add Job</title></head>
+<body>
+  <h2>Add Job</h2>
+  <input id="title" placeholder="Title">
+  <input id="company" placeholder="Company">
+  <input id="location" placeholder="Location">
+  <input id="salary" placeholder="Salary">
+  <textarea id="description" placeholder="Description"></textarea>
+  <button onclick="addJob()">Post Job</button>
+  <script>
+    function addJob() {
+      fetch('http://localhost:5000/jobs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: document.getElementById('title').value,
+          company: document.getElementById('company').value,
+          location: document.getElementById('location').value,
+          salary: document.getElementById('salary').value,
+          description: document.getElementById('description').value
+        })
+      }).then(res => res.json()).then(data => alert(data.message));
+    }
+  </script>
+</body>
+</html>
